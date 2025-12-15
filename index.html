@@ -1,407 +1,128 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Anna — Dark Orbit Story</title>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;700&display=swap" rel="stylesheet" />
+  <title>Anna — Deep Space Archive</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
-  <!-- OVERLAY EFFETTI -->
+  <!-- VISUAL OVERLAYS -->
   <div class="scanlines"></div>
   <div class="noise"></div>
   <div class="warp-overlay"></div>
 
-  <!-- TOP NAV (comparirà dopo il launch) -->
+  <!-- TOP NAV -->
   <header id="top-nav" class="top-nav hidden">
     <div class="top-nav-inner">
-      <div class="brand">ANNA // DARK ORBIT ARCHIVE</div>
+      <div class="brand">ANNA // DEEP SPACE ARCHIVE</div>
       <nav class="nav-links">
-        <button class="nav-link active" data-target="map">SYSTEM MAP</button>
-        <button class="nav-link" data-target="level-origins">ORIGINS</button>
-        <button class="nav-link" data-target="level-classics">CLASSICS</button>
-        <button class="nav-link" data-target="level-digital">DIGITAL</button>
-        <button class="nav-link" data-target="level-work">WORK WORLDS</button>
-        <button class="nav-link" data-target="level-collapse">SYSTEM COLLAPSE</button>
-        <button class="nav-link" data-target="level-freelance">FREELANCE</button>
-        <button class="nav-link" data-target="level-future">FUTURE</button>
+        <button class="nav-link" data-target="map">MAP</button>
+        <button class="nav-link" data-target="origins">ORIGINS</button>
+        <button class="nav-link" data-target="classics">CLASSICS</button>
+        <button class="nav-link" data-target="digital">DIGITAL</button>
+        <button class="nav-link" data-target="work">WORK</button>
+        <button class="nav-link" data-target="collapse">COLLAPSE</button>
+        <button class="nav-link" data-target="freelance">FREELANCE</button>
+        <button class="nav-link" data-target="future">FUTURE</button>
       </nav>
     </div>
   </header>
 
-  <!-- HERO: SPACESHIP -->
+  <!-- HERO / LAUNCH -->
   <section class="hero" id="hero">
     <div class="hud">
       <span>ANNA COLARUSSO // FLIGHT LOG</span>
       <span>STATUS: PRE-LAUNCH</span>
     </div>
 
-    <div class="ship-wrapper">
-      <div class="ship-wireframe">
-        <!-- Corpo -->
-        <div class="ship-body"></div>
-        <!-- Ali -->
-        <div class="ship-wing wing-left"></div>
-        <div class="ship-wing wing-right"></div>
-        <!-- Cockpit -->
-        <div class="ship-cockpit"></div>
-        <!-- Motori -->
-        <div class="ship-engine engine-left"></div>
-        <div class="ship-engine engine-right"></div>
-      </div>
-      <div class="ship-shadow"></div>
+    <div class="ship">
+      <div class="ship-body"></div>
+      <div class="ship-wing left"></div>
+      <div class="ship-wing right"></div>
+      <div class="ship-core"></div>
     </div>
 
     <div class="hero-text">
       <h1>LAUNCH SEQUENCE READY</h1>
-      <p>Dark Orbit Archive // Personal System Log</p>
+      <p>Navigate the archive by moving forward through space.</p>
       <button id="launch-btn">ENTER SYSTEM</button>
     </div>
   </section>
 
-  <!-- SISTEMA SOLARE WIREFRAME + ISTRUZIONI -->
-  <section id="solar-system" class="solar-system hidden">
-    <div class="system-label">
-      <h2>DARK ORBIT SYSTEM MAP</h2>
-      <p>Seleziona un pianeta oppure usa la barra di navigazione in alto.</p>
+  <!-- SPACE MAP -->
+  <section id="space-lane" class="space-lane hidden">
+    <div class="space-hud">
+      <span>FORWARD VELOCITY: STABLE</span>
+      <span>DEPTH SCAN: ACTIVE</span>
     </div>
 
-    <div class="star-core"></div>
-
-    <!-- Pianeti -->
-    <button class="planet p1" data-target="level-origins">
-      <span class="planet-label">ORIGINS</span>
-    </button>
-
-    <button class="planet p2" data-target="level-classics">
-      <span class="planet-label">CLASSICS</span>
-    </button>
-
-    <button class="planet p3" data-target="level-digital">
-      <span class="planet-label">DIGITAL</span>
-    </button>
-
-    <button class="planet p4" data-target="level-work">
-      <span class="planet-label">WORK</span>
-    </button>
-
-    <button class="planet p5 glitch-planet" data-target="level-collapse">
-      <span class="planet-label">COLLAPSE</span>
-    </button>
-
-    <button class="planet p6" data-target="level-freelance">
-      <span class="planet-label">FREELANCE</span>
-    </button>
-
-    <button class="planet p7" data-target="level-future">
-      <span class="planet-label">FUTURE</span>
-    </button>
-
-    <div class="system-hud">
-      <span>HOVER PIANETS TO SCAN // CLICK TO WARP</span>
-      <span>OR USE THE TOP NAV BAR</span>
+    <div class="space-field">
+      <button class="planet depth-1" data-target="origins">ORIGINS</button>
+      <button class="planet depth-2" data-target="classics">CLASSICS</button>
+      <button class="planet depth-3" data-target="digital">DIGITAL</button>
+      <button class="planet depth-4" data-target="work">WORK</button>
+      <button class="planet depth-5 glitch" data-target="collapse">COLLAPSE</button>
+      <button class="planet depth-6" data-target="freelance">FREELANCE</button>
+      <button class="planet depth-7" data-target="future">FUTURE</button>
     </div>
   </section>
 
-  <!-- CONTENUTI: STAZIONI ORBITALI -->
+  <!-- CONTENT -->
   <main id="levels" class="levels hidden">
 
-    <!-- ORIGINS -->
-    <section class="level" id="level-origins">
-      <header class="level-header">
-        <div>
-          <h2>PLANET: ORIGINS</h2>
-          <p class="you-are-here">YOU ARE HERE // EARLY SPARKS</p>
-        </div>
-        <button class="back-btn">↩ SYSTEM MAP</button>
-      </header>
-      <div class="level-body">
-        <p class="level-intro">
-          Le prime scintille. Un poster, un video, una fotocamera presa in prestito.
-          È il momento in cui capisco che posso creare mondi.
-        </p>
-        <div class="level-grid">
-          <div class="card">
-            <h3>Il primo poster</h3>
-            <p>
-              A 18 anni progetto il mio primo poster per l’esame di Stato.
-              Nessuna base di impaginazione, solo intuito visivo e amore per la conoscenza.
-            </p>
-          </div>
-          <div class="card">
-            <h3>Il primo video</h3>
-            <p>
-              Nel corso di Creative Computing realizzo un video per un modulo.
-              Mi rendo conto che so guidare un progetto dall’idea al risultato finale.
-              “Questa è la mia chiamata”, penso.
-            </p>
-          </div>
-          <div class="card">
-            <h3>Bologna — Canon 500D</h3>
-            <p>
-              Affitto una Canon 500D dall’università e la porto a Bologna.
-              Una nevicata mi blocca lì due settimane: le foto sono orribili, ma io sono felice.
-              Capisco che creare mi fa sentire viva.
-            </p>
-          </div>
-        </div>
-      </div>
+    <section class="level" id="origins">
+      <h2>PLANET: ORIGINS</h2>
+      <p>
+        The first sparks. A poster, a video, a borrowed camera.
+        This is where I realise I can build worlds.
+      </p>
     </section>
 
-    <!-- CLASSICS -->
-    <section class="level" id="level-classics">
-      <header class="level-header">
-        <div>
-          <h2>PLANET: CLASSICS & LANGUAGE</h2>
-          <p class="you-are-here">YOU ARE HERE // WORDS & HERITAGE</p>
-        </div>
-        <button class="back-btn">↩ SYSTEM MAP</button>
-      </header>
-      <div class="level-body">
-        <p class="level-intro">
-          Lingua, classici, memoria. Qui imparo a pensare in profondità e a dare peso alle parole.
-        </p>
-        <div class="level-grid">
-          <div class="card">
-            <h3>Olimpiadi di Italiano</h3>
-            <p>
-              Dal liceo alle nazionali: arrivo decima e passo un weekend
-              all’Accademia della Crusca, con intervista su Rai Uno.
-              La lingua diventa arma, casa e gioco serio.
-            </p>
-          </div>
-          <div class="card">
-            <h3>IELTS & competizioni</h3>
-            <p>
-              Gare di inglese, IELTS 8. L’inglese diventa seconda pelle e apre
-              la porta a studi, lavoro e vita all’estero.
-            </p>
-          </div>
-          <div class="card">
-            <h3>Archeologia</h3>
-            <p>
-              Tirocinio come archeologa apprendista per AdArte Rimini.
-              Scavo nella memoria materiale del passato. La storia non è astratta: è nel terreno.
-            </p>
-          </div>
-          <div class="card">
-            <h3>Volontariato</h3>
-            <p>
-              Volontaria per Nati per Leggere, leggo storie ai bambini in pediatria:
-              la narrazione diventa contatto e cura.
-            </p>
-          </div>
-        </div>
-      </div>
+    <section class="level" id="classics">
+      <h2>PLANET: CLASSICS & LANGUAGE</h2>
+      <p>
+        Language, heritage, memory. Words as structure, thought as architecture.
+      </p>
     </section>
 
-    <!-- DIGITAL AWAKENING -->
-    <section class="level" id="level-digital">
-      <header class="level-header">
-        <div>
-          <h2>PLANET: DIGITAL AWAKENING</h2>
-          <p class="you-are-here">YOU ARE HERE // CODE & STORY</p>
-        </div>
-        <button class="back-btn">↩ SYSTEM MAP</button>
-      </header>
-      <div class="level-body">
-        <p class="level-intro">
-          Il passaggio dal codice alla narrazione interattiva. Le tecnologie diventano strumenti per raccontare storie.
-        </p>
-        <div class="level-grid">
-          <div class="card">
-            <h3>Creative Computing → Digital Media</h3>
-            <p>
-              Inizio con Creative Computing, imparo Java, Processing, AR.
-              Poi capisco che voglio creare mondi, non solo scrivere codice.
-              Passo a Digital Media.
-            </p>
-          </div>
-          <div class="card">
-            <h3>Loving Vincent (AR)</h3>
-            <p>
-              Creo un’esperienza AR sulle lettere di Van Gogh.
-              Il progetto cattura l’attenzione di John Morrison e Liminal Studio.
-            </p>
-          </div>
-          <div class="card">
-            <h3>A Drama in Time (Tesi)</h3>
-            <p>
-              Progetto un’esperienza AR per Riddle’s Court durante il Covid,
-              con lo Scottish Heritage Building Trust.
-              Heritage, luogo e storia si intrecciano con la tecnologia.
-            </p>
-          </div>
-          <div class="card">
-            <h3>Liminal Studio</h3>
-            <p>
-              Collaboro con Liminal Studio su progetti di digital heritage
-              e terzo settore. John diventa collega e amico.
-            </p>
-          </div>
-        </div>
-      </div>
+    <section class="level" id="digital">
+      <h2>PLANET: DIGITAL AWAKENING</h2>
+      <p>
+        Code becomes narrative. Technology becomes a storytelling medium.
+      </p>
     </section>
 
-    <!-- WORK WORLDS -->
-    <section class="level" id="level-work">
-      <header class="level-header">
-        <div>
-          <h2>PLANET: WORK WORLDS</h2>
-          <p class="you-are-here">YOU ARE HERE // SERVICE & TEACHING</p>
-        </div>
-        <button class="back-btn">↩ SYSTEM MAP</button>
-      </header>
-      <div class="level-body">
-        <p class="level-intro">
-          Lavoro, servizio, insegnamento. Dal contatto diretto con le persone alle aule universitarie.
-        </p>
-        <div class="level-grid">
-          <div class="card">
-            <h3>Sheraton (2017–2019)</h3>
-            <p>
-              Food waitress e wine server.
-              Imparo ritmo, servizio, ascolto, presenza in mezzo al caos.
-            </p>
-          </div>
-          <div class="card">
-            <h3>Scottish Water (2019–2021)</h3>
-            <p>
-              Wholesale Service Desk Customer Care Assistant.
-              Gestisco clienti, casi complessi, Dynamics e lavoro d’ufficio strutturato.
-            </p>
-          </div>
-          <div class="card">
-            <h3>Napier — Associate Lecturer</h3>
-            <p>
-              Dal 2021 al 2023 insegno animazione, visual design, fotografia,
-              video editing e UX tra School of Computing e School of Arts.
-            </p>
-          </div>
-          <div class="card">
-            <h3>Research Assistant (Estate 2023)</h3>
-            <p>
-              Lavoro come Research Assistant in digital heritage.
-              Poco dopo, però, qualcosa si spezza.
-            </p>
-          </div>
-          <div class="card">
-            <h3>Heriot-Watt (2024, 2025)</h3>
-            <p>
-              Ritorno all’insegnamento come Teaching Assistant,
-              poi di nuovo nel 2025. Una versione più matura di me entra in aula.
-            </p>
-          </div>
-        </div>
-      </div>
+    <section class="level" id="work">
+      <h2>PLANET: WORK WORLDS</h2>
+      <p>
+        Service, teaching, systems. From hospitality to higher education.
+      </p>
     </section>
 
-    <!-- SYSTEM COLLAPSE -->
-    <section class="level level-collapse" id="level-collapse">
-      <header class="level-header">
-        <div>
-          <h2>PLANET: SYSTEM COLLAPSE 2023</h2>
-          <p class="you-are-here">YOU ARE HERE // CRASH & REBOOT</p>
-        </div>
-        <button class="back-btn">↩ SYSTEM MAP</button>
-      </header>
-      <div class="level-body">
-        <p class="level-intro">
-          Un breakdown emotivo e psicologico. Un ritorno forzato in Italia.
-          Un sistema che crolla, e una nuova traiettoria che nasce.
-        </p>
-        <div class="level-grid">
-          <div class="card">
-            <h3>Il crollo</h3>
-            <p>
-              Nel 2023, mentre lavoro come Research Assistant,
-              vivo un crollo emotivo che impatta profondamente la mia carriera e la mia identità.
-            </p>
-          </div>
-          <div class="card">
-            <h3>La pausa forzata</h3>
-            <p>
-              Devo lasciare il Regno Unito e tornare in Italia dai miei genitori per alcuni mesi.
-              È un incubo, ma anche una linea di demarcazione netta.
-            </p>
-          </div>
-          <div class="card">
-            <h3>Non voltarsi indietro</h3>
-            <p>
-              Da lì in poi scelgo di non guardare più indietro: il passato non è dove sto andando.
-              Porto con me la paura di espormi e brillare, ma anche la volontà di ricostruirmi.
-            </p>
-          </div>
-        </div>
-      </div>
+    <section class="level collapse" id="collapse">
+      <h2>PLANET: SYSTEM COLLAPSE</h2>
+      <p>
+        A breakdown. A forced return. The system fails — and reboots.
+      </p>
     </section>
 
-    <!-- FREELANCE ERA -->
-    <section class="level" id="level-freelance">
-      <header class="level-header">
-        <div>
-          <h2>PLANET: FREELANCE ERA</h2>
-          <p class="you-are-here">YOU ARE HERE // OWN PROJECTS</p>
-        </div>
-        <button class="back-btn">↩ SYSTEM MAP</button>
-      </header>
-      <div class="level-body">
-        <p class="level-intro">
-          Una nuova fase: usare tutto ciò che ho imparato per costruire progetti su misura per persone reali.
-        </p>
-        <div class="level-grid">
-          <div class="card">
-            <h3>Konj Persian Cuisine</h3>
-            <p>
-              Web design e storytelling visivo per un ristorante persiano.
-              Unire estetica, funzionalità e cultura.
-            </p>
-          </div>
-          <div class="card">
-            <h3>Romina Key Photography</h3>
-            <p>
-              Brand, sito e copywriting per una fotografa di matrimoni.
-              Voce emotiva, intelligente, originale.
-            </p>
-          </div>
-          <div class="card">
-            <h3>Legacy of Grandmothers</h3>
-            <p>
-              Identità visiva completa per un progetto sulle storie delle nonne.
-              Colore (anche se qui è tutto in B/N), memoria e cura.
-            </p>
-          </div>
-          <div class="card">
-            <h3>Farah & altri</h3>
-            <p>
-              Booking system, supporto digitale, consulenza.
-              Inizio a lavorare come designer e stratega freelance.
-            </p>
-          </div>
-        </div>
-      </div>
+    <section class="level" id="freelance">
+      <h2>PLANET: FREELANCE ERA</h2>
+      <p>
+        Building bespoke systems for real people, with care and intent.
+      </p>
     </section>
 
-    <!-- FUTURE -->
-    <section class="level level-future" id="level-future">
-      <header class="level-header">
-        <div>
-          <h2>OUTER RIM // FUTURE</h2>
-          <p class="you-are-here">YOU ARE HERE // UNMAPPED SPACE</p>
-        </div>
-        <button class="back-btn">↩ SYSTEM MAP</button>
-      </header>
-      <div class="level-body">
-        <p class="level-intro">
-          Il pianeta ancora non mappato. Il futuro come spazio aperto, non come percorso già scritto.
-        </p>
-        <div class="future-console">
-          <p>INITIALIZING UNKNOWN SYSTEM…</p>
-          <p>New coordinates pending.</p>
-        </div>
-      </div>
+    <section class="level future" id="future">
+      <h2>OUTER RIM // FUTURE</h2>
+      <p>
+        Uncharted territory. Coordinates pending.
+      </p>
     </section>
 
   </main>
