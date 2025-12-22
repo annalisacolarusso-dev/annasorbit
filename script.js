@@ -13,25 +13,31 @@ launchBtn.addEventListener('click', () => {
   topNav.classList.remove('hidden');
 });
 
+function showLevel(id) {
+  levels.classList.remove('hidden');
+
+  document.querySelectorAll('.level').forEach(l => {
+    l.style.display = 'none';
+  });
+
+  const target = document.getElementById(id);
+  if (target) target.style.display = 'block';
+}
+
 function warpTo(id) {
   document.body.classList.add('warp');
 
   setTimeout(() => {
     spaceLane.classList.add('hidden');
-    levels.classList.remove('hidden');
-
-    document.querySelectorAll('.level').forEach(l => {
-      l.style.display = 'none';
-    });
-
-    document.getElementById(id).style.display = 'block';
+    showLevel(id);
     document.body.classList.remove('warp');
   }, 800);
 }
 
 planets.forEach(planet => {
-  planet.addEventListener('click', () => {
-    warpTo(planet.dataset.target);
+  planet.addEventListener('click', (e) => {
+    const target = e.currentTarget.querySelector('span')?.dataset.target;
+    if (target) warpTo(target);
   });
 });
 
