@@ -16,9 +16,18 @@ body {
 .scanlines,
 .noise,
 .warp-overlay {
-  pointer-events: none;
+  pointer-events: none;        /* ensure overlays never block clicks */
   position: fixed;
   inset: 0;
+}
+
+/* keep nav and UI clickable */
+.top-nav,
+.hero,
+.space-lane,
+.levels {
+  position: relative;
+  z-index: 10;
 }
 
 .scanlines {
@@ -70,13 +79,23 @@ body.warp .warp-overlay {
   top: 0;
   width: 100%;
   background: rgba(0,0,0,0.85);
-  z-index: 910;
 }
 
 .top-nav-inner {
   display: flex;
   justify-content: space-between;
-  padding: 12px;
+  align-items: center;
+  padding: 12px 16px;
+}
+
+.brand {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .nav-link {
@@ -84,17 +103,34 @@ body.warp .warp-overlay {
   border: 1px solid #444;
   color: #eee;
   margin-left: 6px;
+  padding: 4px 8px;
   cursor: pointer;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.nav-link:hover {
+  background: #111;
 }
 
 /* HERO */
 .hero {
   min-height: 100vh;
+  padding-top: 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+.hud {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.7rem;
+  opacity: 0.8;
 }
 
 .ship {
@@ -133,11 +169,37 @@ body.warp .warp-overlay {
   transform: translateX(-50%);
 }
 
+.primary-btn {
+  margin-top: 16px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 1px solid #eee;
+  background: transparent;
+  color: #eee;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+
+.primary-btn:hover {
+  background: #eee;
+  color: #000;
+}
+
 /* SPACE */
 .space-lane {
   perspective: 1000px;
   height: 100vh;
   overflow: hidden;
+  padding-top: 60px;
+}
+
+.space-hud {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+  font-size: 0.7rem;
+  opacity: 0.8;
 }
 
 .space-field {
@@ -156,17 +218,31 @@ body.warp .warp-overlay {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 46px;
-  height: 46px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
-  border: 1px solid #eee;
-  background: transparent;
+  border: 1px solid rgba(255,255,255,0.4);
+  background: radial-gradient(circle at 30% 30%, #fff, #555 40%, #000 75%);
   color: #eee;
-  font-size: 0.6rem;
+  font-size: 0.55rem;
   cursor: pointer;
   transform-style: preserve-3d;
+  box-shadow: 0 0 10px rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
+/* inner label carries data-target, easier to style */
+.planet span {
+  pointer-events: none;
+  padding: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Depth positions */
 .depth-1 { transform: translate3d(-200px,-120px,-200px); }
 .depth-2 { transform: translate3d(200px,-60px,-450px); }
 .depth-3 { transform: translate3d(-260px,60px,-700px); }
@@ -174,6 +250,11 @@ body.warp .warp-overlay {
 .depth-5 { transform: translate3d(-120px,-200px,-1200px); }
 .depth-6 { transform: translate3d(260px,-160px,-1500px); }
 .depth-7 { transform: translate3d(0,220px,-1800px); }
+
+.planet:hover {
+  box-shadow: 0 0 18px rgba(255,255,255,0.4);
+  transform: scale(1.05) translateZ(10px);
+}
 
 .glitch {
   animation: glitch 2s infinite;
